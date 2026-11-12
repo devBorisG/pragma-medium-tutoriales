@@ -46,8 +46,10 @@ kubectl get configmap -n argo -l app.kubernetes.io/component=workflow-controller
 ```bash
 kubectl create -f workflow-prueba.yaml
 kubectl get pods -n argo -w      # los pods terminan y ~30 s después desaparecen (Ctrl+C para salir)
-./verificar.sh                   # a los ~2 minutos, el workflow nuevo también desaparece
+./verificar.sh                   # el workflow nuevo desaparece unos minutos después de su TTL (ver nota)
 ```
+
+**Nota sobre los tiempos:** los pods desaparecen a los ~30 s (`deleteDelayDuration`). Los workflows no se borran exactamente a los 120 s del TTL: el controller revisa los TTL de los workflows cada 5 minutos por defecto (variable `WORKFLOW_GC_PERIOD`), así que puede tardar. En una prueba local, el workflow ya había desaparecido a los 15 minutos. Espera ese tiempo antes de repetir `./verificar.sh`.
 
 Los workflows del paso 2 no se limpian solos: se crearon antes de aplicar los defaults.
 Límpialos con `kubectl delete workflows -n argo --all`.
