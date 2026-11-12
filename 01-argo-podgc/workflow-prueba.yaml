@@ -1,0 +1,22 @@
+# Workflow de 3 pasos en paralelo: cada paso es un pod
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: prueba-gc-
+  namespace: argo
+spec:
+  serviceAccountName: argo-workflow
+  entrypoint: main
+  templates:
+    - name: main
+      steps:
+        - - name: paso-a
+            template: trabajo
+          - name: paso-b
+            template: trabajo
+          - name: paso-c
+            template: trabajo
+    - name: trabajo
+      container:
+        image: busybox:1.36
+        command: [sh, -c, "echo trabajando en $(hostname); sleep 5"]

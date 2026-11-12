@@ -1,0 +1,17 @@
+# Igual a producción pero con tiempos cortos para verlo funcionar en minutos
+workflow:
+  serviceAccount:
+    create: true
+    name: argo-workflow
+  rbac:
+    create: true
+controller:
+  workflowDefaults:
+    spec:
+      podGC:
+        strategy: OnPodCompletion
+        deleteDelayDuration: 30s      # en producción: 600s
+      ttlStrategy:
+        secondsAfterCompletion: 180   # en producción: 3600
+        secondsAfterSuccess: 120      # en producción: 1800
+        secondsAfterFailure: 300      # en producción: 86400

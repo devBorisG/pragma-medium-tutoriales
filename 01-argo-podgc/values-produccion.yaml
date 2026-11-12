@@ -1,0 +1,17 @@
+# Valores del tutorial
+workflow:
+  serviceAccount:
+    create: true
+    name: argo-workflow
+  rbac:
+    create: true
+controller:
+  workflowDefaults:
+    spec:
+      podGC:
+        strategy: OnPodCompletion
+        deleteDelayDuration: 600s
+      ttlStrategy:
+        secondsAfterCompletion: 3600
+        secondsAfterSuccess: 1800
+        secondsAfterFailure: 86400

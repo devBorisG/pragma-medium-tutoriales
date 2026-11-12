@@ -1,0 +1,7 @@
+# La versión "antes": ruta escrita a mano. Sirve para ver dónde se rompe.
+ARG BASE_IMAGE=eclipse-temurin:21-jdk
+FROM ${BASE_IMAGE}
+COPY certs/MiRootCA.crt /tmp/MiRootCA.crt
+RUN $JAVA_HOME/bin/keytool -noprompt -import -trustcacerts \
+      -keystore $JAVA_HOME/lib/security/cacerts \
+      -storepass changeit -alias MiRootCA -file /tmp/MiRootCA.crt

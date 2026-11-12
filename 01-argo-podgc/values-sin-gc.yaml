@@ -1,0 +1,7 @@
+# Instalación "de fábrica": sin podGC ni ttlStrategy (para reproducir el problema)
+workflow:
+  serviceAccount:
+    create: true
+    name: argo-workflow
+  rbac:
+    create: true
