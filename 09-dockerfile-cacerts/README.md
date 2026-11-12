@@ -7,6 +7,8 @@ Importa una CA propia al truststore de la JVM sin escribir la ruta de `cacerts` 
 - Docker o Podman.
 - `openssl` (para generar una CA de prueba).
 
+> **Windows:** ejecuta todo en Git Bash. Con Podman: `export DOCKER=podman` antes de los scripts. `openssl` ya viene con Git for Windows. Preparación completa en el [README raíz](../README.md#windows-git-bash-y-podman).
+
 ## Pasos
 
 ```bash

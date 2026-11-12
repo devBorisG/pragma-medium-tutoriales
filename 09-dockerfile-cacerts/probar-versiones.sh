@@ -2,6 +2,7 @@
 # Construye con Java 8, 11, 17 y 21 y confirma que la CA quedó importada.
 # Uso: ./probar-versiones.sh   (con Podman: DOCKER=podman ./probar-versiones.sh)
 set -euo pipefail
+export MSYS_NO_PATHCONV=1   # Git Bash (Windows): evita que reescriba rutas
 cd "$(dirname "$0")"
 DOCKER=${DOCKER:-docker}
 [ -f certs/MiRootCA.crt ] || ./generar-ca.sh

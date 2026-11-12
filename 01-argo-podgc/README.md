@@ -7,6 +7,9 @@ Reproduce el problema en un clúster local y aplica la solución con Helm (o con
 - Docker o Podman, [kind](https://kind.sigs.k8s.io/) 0.20+, `kubectl` y Helm 3.
 - Opcional: Terraform 1.6+ para la variante con Terraform.
 
+> **Windows:** usa Git Bash y Podman; la preparación (máquina `--rootful`, `KIND_EXPERIMENTAL_PROVIDER=podman`) está en el [README raíz](../README.md#windows-git-bash-y-podman).
+> Con Podman, crea el clúster con `KIND_EXPERIMENTAL_PROVIDER=podman kind create cluster --name argo-demo`.
+
 ## 1. Clúster y Argo sin garbage collection
 
 ```bash
@@ -22,7 +25,7 @@ helm install argo-workflows argo/argo-workflows -n argo --create-namespace \
 kubectl create -f workflow-prueba.yaml
 kubectl create -f workflow-prueba.yaml
 sleep 60
-./verificar.sh
+./verificar.sh                   # en Git Bash, si falla: bash verificar.sh
 ```
 
 **Resultado esperado:** 6 pods en `Succeeded` que nunca se borran y 2 workflows guardados.
